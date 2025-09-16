@@ -2,10 +2,16 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <RootNamespace>LiveCharts2Demo</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>LiveCharts2Demo.Program</StartupObject>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
 
     <!-- Disable null warnings -->
     <NoWarn>$(NoWarn);CA1416</NoWarn>
@@ -18,6 +24,9 @@
     <NoWarn>$(NoWarn);CS8622</NoWarn>
     <NoWarn>$(NoWarn);IDE0305</NoWarn>
     <NoWarn>$(NoWarn);IDE0057</NoWarn>
+
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <SignAssembly>False</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>

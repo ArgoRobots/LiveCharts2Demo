@@ -1,8 +1,8 @@
 # LiveCharts2 WinForms Demo
 
-A comprehensive demonstration application showcasing the capabilities of LiveCharts2 with SkiaSharp in a .NET 9 WinForms environment. This demo provides interactive examples of various chart types with customizable animations and real-time data visualization.
+A demonstration application showcasing the capabilities of LiveCharts2 with SkiaSharp in a .NET 9 WinForms environment. This demo provides interactive examples of various chart types with customizable animations and real-time data visualization.
 
-## 🚀 Features
+## Features
 
 ### Chart Types
 
@@ -16,13 +16,9 @@ A comprehensive demonstration application showcasing the capabilities of LiveCha
 
 ### Animation Controls
 
-- **Animation Speed Control** - Adjustable animation duration (100ms - 3000ms)
-- **Easing Functions** - Multiple easing options including:
-  - Linear
-  - EaseInQuad, EaseOutQuad, EaseInOutQuad
-  - EaseInCubic, EaseOutCubic, EaseInOutCubic
+- **Animation Speed Control** - Adjustable animation duration
+- **Easing Functions** - Multiple easing options
 - **Animation Toggle** - Enable/disable animations globally
-- **Real-time Data Refresh** - Generate new random data with smooth transitions
 
 ## Prerequisites
 
@@ -36,7 +32,7 @@ A comprehensive demonstration application showcasing the capabilities of LiveCha
 2. Place the .env file in the project root directory (where the .sln file is located).
 3. Build the project by pressing `Ctrl + Shift + B`.
 
-## 🔗 Resources
+## Resources
 
 - [LiveCharts2 Documentation](https://livecharts.dev/)
 - [SkiaSharp Documentation](https://docs.microsoft.com/en-us/dotnet/api/skiasharp)
