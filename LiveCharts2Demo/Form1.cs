@@ -22,8 +22,12 @@ namespace LiveCharts2Demo
         private Label animationSpeedLabel;
         private ComboBox easingComboBox;
         private Button refreshDataButton;
+        private Button clearChartButton;
         private CheckBox enableAnimationsCheckBox;
         private Label easingLabel;
+
+        // Track current chart type
+        private string currentChartType = "Line";
 
         public Form1()
         {
@@ -202,6 +206,19 @@ namespace LiveCharts2Demo
             };
             refreshDataButton.Click += OnRefreshData;
             controlPanel.Controls.Add(refreshDataButton);
+            yPos += 45;
+
+            clearChartButton = new Button
+            {
+                Text = "Clear Chart",
+                Location = new Point(10, yPos),
+                Size = new Size(200, 35),
+                BackColor = Color.FromArgb(220, 53, 69),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat
+            };
+            clearChartButton.Click += OnClearChart;
+            controlPanel.Controls.Add(clearChartButton);
         }
         private Button CreateButton(string text, Point location, Action clickHandler)
         {
@@ -240,6 +257,7 @@ namespace LiveCharts2Demo
         private void ShowLineChart()
         {
             ShowCartesianChart();
+            currentChartType = "Line";
 
             ISeries[] series =
             [
@@ -266,6 +284,7 @@ namespace LiveCharts2Demo
         private void ShowBarChart()
         {
             ShowCartesianChart();
+            currentChartType = "Bar";
 
             ISeries[] series =
             [
@@ -288,6 +307,7 @@ namespace LiveCharts2Demo
         private void ShowColumnChart()
         {
             ShowCartesianChart();
+            currentChartType = "Column";
 
             ISeries[] series =
             [
@@ -310,6 +330,7 @@ namespace LiveCharts2Demo
         private void ShowAreaChart()
         {
             ShowCartesianChart();
+            currentChartType = "Area";
 
             ISeries[] series =
             [
@@ -334,6 +355,7 @@ namespace LiveCharts2Demo
         private void ShowScatterChart()
         {
             ShowCartesianChart();
+            currentChartType = "Scatter";
 
             ObservablePoint[] scatterData1 = GenerateScatterData(20);
             ObservablePoint[] scatterData2 = GenerateScatterData(20);
@@ -363,6 +385,7 @@ namespace LiveCharts2Demo
         private void ShowPieChart()
         {
             ShowPieChartOnly();
+            currentChartType = "Pie";
 
             ISeries[] pieData =
             [
@@ -403,6 +426,7 @@ namespace LiveCharts2Demo
         private void ShowGeoMap()
         {
             ShowGeoMapOnly();
+            currentChartType = "GeoMap";
 
             // Create sample heat map data for various countries
             HeatLand[] heatLands = GenerateGeoMapData();
@@ -499,38 +523,46 @@ namespace LiveCharts2Demo
         }
         private void OnRefreshData(object? sender, EventArgs e)
         {
-            // Refresh the current chart with new data
+            // Refresh the current chart with new data based on the tracked chart type
+            switch (currentChartType)
+            {
+                case "Line":
+                    ShowLineChart();
+                    break;
+                case "Bar":
+                    ShowBarChart();
+                    break;
+                case "Column":
+                    ShowColumnChart();
+                    break;
+                case "Area":
+                    ShowAreaChart();
+                    break;
+                case "Scatter":
+                    ShowScatterChart();
+                    break;
+                case "Pie":
+                    ShowPieChart();
+                    break;
+                case "GeoMap":
+                    ShowGeoMap();
+                    break;
+            }
+        }
+        private void OnClearChart(object? sender, EventArgs e)
+        {
+            // Clear the currently visible chart
             if (cartesianChart.Visible)
             {
-                ISeries? firstSeries = cartesianChart.Series?.FirstOrDefault();
-                if (firstSeries is LineSeries<double>)
-                {
-                    ShowLineChart();
-                }
-                else if (firstSeries is RowSeries<double>)
-                {
-                    ShowBarChart();
-                }
-                else if (firstSeries is ColumnSeries<double>)
-                {
-                    ShowColumnChart();
-                }
-                else if (firstSeries is StackedAreaSeries<double>)
-                {
-                    ShowAreaChart();
-                }
-                else if (firstSeries is ScatterSeries<ObservablePoint>)
-                {
-                    ShowScatterChart();
-                }
+                cartesianChart.Series = [];
             }
             else if (pieChart.Visible)
             {
-                ShowPieChart();
+                pieChart.Series = [];
             }
             else if (geoMap.Visible)
             {
-                ShowGeoMap();
+                geoMap.Series = [];
             }
         }
         private static Func<float, float> GetEasingFunction(string easingName)
